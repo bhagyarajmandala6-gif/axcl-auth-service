@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <property resource="application.properties"/>
+    <!-- Use default if spring.profiles.active is not set -->
+    <property name="ACTIVE_PROFILE" value="${spring.profiles.active:-default}" />
+    <property resource="application-${ACTIVE_PROFILE}.properties"/>
+    <property name="LOG_DIR" value="${logging.path:-/tmp/logs}" />
+    <property name="ARCHIVE_LOG_DIR" value="${LOG_DIR}/archive" />
+    <property name="APP_NAME" value="axcl_drivers_service_java" />
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.innocito.axcl.config.MaskingPatternLayout">
+                <patternsProperty>(password.*)</patternsProperty>
+                <pattern>%d{dd MMM yyyy HH:mm:ss.SSS} [%t] [%-5level] [%F:%L] - %msg%n</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <!-- App Log File Appender -->
+    <appender name="APP_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${APP_NAME}-${ACTIVE_PROFILE}-app.log</file>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.innocito.axcl.config.MaskingPatternLayout">
+                <patternsProperty>(password.*)</patternsProperty>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%-5level] [%F:%L] - %msg%n</pattern>
+            </layout>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${ARCHIVE_LOG_DIR}/${APP_NAME}-${ACTIVE_PROFILE}-app-%d{yyyyMMdd}.%i.gz</fileNamePattern>
+            <maxFileSize>30MB</maxFileSize>
+            <maxHistory>50</maxHistory>
+            <totalSizeCap>4GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Performance Log File Appender -->
+    <appender name="PERF_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${APP_NAME}-${ACTIVE_PROFILE}-perf.log</file>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.innocito.axcl.config.MaskingPatternLayout">
+                <patternsProperty>(password.*)</patternsProperty>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%-5level] [%F:%L] - %msg%n</pattern>
+            </layout>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${ARCHIVE_LOG_DIR}/${APP_NAME}-${ACTIVE_PROFILE}-perf-%d{yyyyMMdd}.%i.gz</fileNamePattern>
+            <maxFileSize>30MB</maxFileSize>
+            <maxHistory>50</maxHistory>
+            <totalSizeCap>4GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Logging config for local profile -->
+    <springProfile name="local">
+        <root level="ERROR" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </root>
+        <logger name="PERF_LOG" level="DEBUG" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+        <logger name="com.innocito.axcl" level="INFO" additivity="false">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+    </springProfile>
+
+    <!-- Logging config for other profiles -->
+    <springProfile name="prod|uat|dev|staging|dr">
+        <root level="ERROR" additivity="false">
+            <appender-ref ref="APP_LOG" />
+        </root>
+        <logger name="PERF_LOG" level="DEBUG" additivity="false">
+            <appender-ref ref="PERF_LOG" />
+        </logger>
+        <logger name="com.innocito.axcl" level="INFO" additivity="false">
+            <appender-ref ref="APP_LOG" />
+        </logger>
+    </springProfile>
+</configuration>
