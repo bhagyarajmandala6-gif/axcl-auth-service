@@ -1,6 +1,5 @@
 package com.innocito.axcl.config;
 
-import com.innocito.axcl.config.filters.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,14 +13,13 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    //private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     //    @Order(2)
     @Bean
@@ -30,12 +28,8 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/masterData/measurements").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/masterData").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/users/registerOrLogin").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/users/accessToken").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/verification/login/verifyOtp").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/verification/login/sendOTP").permitAll()
+                        //.requestMatchers(HttpMethod.GET, "/api/masterData").permitAll()
+                        .requestMatchers("/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/v3/api-docs.yaml").permitAll()
                         .anyRequest().authenticated()
                 ).exceptionHandling(ex -> {
@@ -43,7 +37,7 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
-        httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        //httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
 

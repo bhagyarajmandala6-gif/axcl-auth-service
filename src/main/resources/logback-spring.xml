@@ -7,7 +7,7 @@
     <property resource="application-${ACTIVE_PROFILE}.properties"/>
     <property name="LOG_DIR" value="${logging.path:-/tmp/logs}" />
     <property name="ARCHIVE_LOG_DIR" value="${LOG_DIR}/archive" />
-    <property name="APP_NAME" value="axcl_drivers_service_java" />
+    <property name="APP_NAME" value="axcl_external_integration_java" />
 
     <!-- Console Appender -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">

@@ -1,3 +1,4 @@
+/*
 package com.innocito.axcl.config;
 
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,6 @@ import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 @Configuration
 public class AWSConfiguration {
     private final AWSS3ConfigProperties awss3ConfigProperties;
-    private final AWSSESConfigProperties awssesConfigProperties;
 
     @Bean
     public S3Client getS3Client() {
@@ -40,3 +40,4 @@ public class AWSConfiguration {
                 .build();
     }
 }
+*/

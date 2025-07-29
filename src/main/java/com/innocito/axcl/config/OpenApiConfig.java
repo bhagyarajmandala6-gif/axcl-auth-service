@@ -20,8 +20,8 @@ import static com.innocito.axcl.util.PropertyNameConstants.APP_VERSION;
 import static com.innocito.axcl.util.PropertyNameConstants.SPRING_PROFILES_ACTIVE;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "Stylz API", version = "1.0",
-        description = "Stylz API Description"),
+@OpenAPIDefinition(info = @Info(title = "AXCL External Integration Service API", version = "1.0",
+        description = "AXCL External Integration Service API Description"),
         security = {@SecurityRequirement(name = "Bearer Token")}
 )
 @SecuritySchemes({

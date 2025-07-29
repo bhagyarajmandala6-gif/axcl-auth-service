@@ -16,8 +16,10 @@ public class BaseData {
     private Date createdOn;
     @LastModifiedDate
     private Date updatedOn;
+    private Date deletedOn;
     @CreatedBy
     private String createdBy;
     @LastModifiedBy
     private String updatedBy;
+    private String deletedBy;
 }

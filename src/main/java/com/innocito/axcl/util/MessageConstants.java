@@ -33,4 +33,6 @@ public class MessageConstants {
     public static final String SERVICE = "Service";
     public static final String FORM_DATA_CONTROLLER_ADVICE = "form.data.controller.advice";
     public static final String REQUEST_BODY = "Request Body: ";
+    public static final String DATA_FETCH_SUCCESSFULLY = "data.fetch.successfully";
+    public static final String MASTER_DATA = "MasterData";
 }

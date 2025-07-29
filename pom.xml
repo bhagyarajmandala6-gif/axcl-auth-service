@@ -89,24 +89,8 @@
 			<version>3.1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>com.googlecode.libphonenumber</groupId>
-			<artifactId>libphonenumber</artifactId>
-			<version>8.13.19</version>
-		</dependency>
-		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>s3</artifactId>
-		</dependency>
-<!--		for reading excel data -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>5.4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>5.4.0</version>
+			<artifactId>sqs</artifactId>
 		</dependency>
 
 		<dependency>
