@@ -21,7 +21,6 @@ public class SentryService {
         log.info("Trip webhook request: {}", webhookRequest);
         try {
             sqsSender.sendMessage(awssqsConfigProperties.getEndpoint(), webhookRequest);
-            log.info("Webhook request sent to SQS successfully.");
         } catch (Exception e) {
             log.error("Error sending sentry trip webhook request to SQS: {}", e.getMessage());
         }

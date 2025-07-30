@@ -50,4 +50,29 @@ public class UtilityConfiguration {
     MongoTransactionManager transactionManager(MongoDatabaseFactory dbFactory) {
         return new MongoTransactionManager(dbFactory);
     }
+
+    /*@Bean
+    public TaskDecorator mdcTaskDecorator() {
+        return runnable -> MdcAware.wrap(runnable);
+    }
+
+    @Bean(name = "taskExecutor")
+    public Executor taskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(10);
+        executor.setMaxPoolSize(20);
+        executor.setQueueCapacity(100);
+        executor.setThreadNamePrefix("async-");
+        executor.setTaskDecorator(mdcTaskDecorator());
+        executor.initialize();
+        return executor;
+    }*/
+
+    /*CompletableFuture.runAsync(MdcAware.wrap(() -> {
+        log.info("Inside async logic");
+    }));*/
+
+    /*executorService.submit(MdcAware.wrap(() -> {
+        log.info("Inside executor task");
+    }));*/
 }

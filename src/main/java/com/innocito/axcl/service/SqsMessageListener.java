@@ -1,7 +1,6 @@
 package com.innocito.axcl.service;
 
 import com.innocito.axcl.config.AWSSQSConfigProperties;
-import io.awspring.cloud.sqs.annotation.SqsListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
@@ -18,7 +17,7 @@ import static com.innocito.axcl.util.ApplicationConstants.MDC_KEY;
 public class SqsMessageListener {
     private AWSSQSConfigProperties awssqsConfigProperties;
 
-    @SqsListener(value = "${sentry.webhook.aws.sqs.queueName}")
+    //@SqsListener(value = "${sentry.webhook.aws.sqs.queueName}")
     public void handleMessage(Message message) {
         String correlationId = message.messageAttributes()
                 .getOrDefault(CORRELATION_ID_HEADER, MessageAttributeValue.builder()
