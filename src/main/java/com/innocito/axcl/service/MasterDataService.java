@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class MasterDataService {
 
     public MasterDataResponse getMasterData() {
+        log.info("Fetching master data");
         MasterDataResponse masterDataResponse = new MasterDataResponse();
         masterDataResponse.setGenders(GenderType.getKeys());
         return masterDataResponse;

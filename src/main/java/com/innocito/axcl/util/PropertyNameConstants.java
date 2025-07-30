@@ -14,4 +14,6 @@ public class PropertyNameConstants {
     public static final String IMAGE_UPLOAD_ALLOWED_FILE_EXTENSIONS = "${image.upload.allowed.file.extensions}";
     public static final String IMAGE_UPLOAD_ALLOWED_CONTENT_TYPES = "${image.upload.allowed.content.types}";
     public static final String SPRING_ACTIVE_PROFILE = "spring.profiles.active";
+    public static final String SENTRY_WEBHOOK_CLIENT_ID = "${sentry.webhook.client.id}";
+    public static final String SENTRY_WEBHOOK_CLIENT_SECRET = "${sentry.webhook.client.secret}";
 }

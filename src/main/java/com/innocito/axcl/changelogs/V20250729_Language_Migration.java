@@ -1,3 +1,4 @@
+/*
 package com.innocito.axcl.changelogs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,3 +60,4 @@ public class V20250729_Language_Migration {
     public void rollback() {
     }
 }
+*/
