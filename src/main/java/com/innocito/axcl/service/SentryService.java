@@ -1,14 +1,10 @@
 package com.innocito.axcl.service;
 
 import com.innocito.axcl.config.AWSSQSConfigProperties;
-import com.innocito.axcl.enums.GenderType;
-import com.innocito.axcl.model.MasterDataResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,9 +20,9 @@ public class SentryService {
         }
         log.info("Trip webhook request: {}", webhookRequest);
         try {
-        sqsSender.sendMessage(awssqsConfigProperties.getEndpoint(),webhookRequest);
-        log.info("Webhook request sent to SQS successfully.");
-    }catch (Exception e) {
+            sqsSender.sendMessage(awssqsConfigProperties.getEndpoint(), webhookRequest);
+            log.info("Webhook request sent to SQS successfully.");
+        } catch (Exception e) {
             log.error("Error sending sentry trip webhook request to SQS: {}", e.getMessage());
         }
     }

@@ -38,4 +38,6 @@ public class ApplicationConstants {
     public static final String DOUBLE_QUOTES_WITH_NO_SPACE = "";
     public static final String RELEASE_TIMESTAMP = "release_timestamp";
     public static final String ACTIVE_PROFILE = "activeProfile";
+    public static final String CORRELATION_ID_HEADER = "X-Correlation-Id";
+    public static final String MDC_KEY = "correlationId";
 }

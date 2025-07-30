@@ -1,7 +1,6 @@
 package com.innocito.axcl.controller;
 
 import com.innocito.axcl.service.SentryService;
-import com.innocito.axcl.service.SqsSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
