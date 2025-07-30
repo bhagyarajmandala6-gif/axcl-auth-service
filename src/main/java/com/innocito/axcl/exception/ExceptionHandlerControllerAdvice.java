@@ -14,6 +14,7 @@ import jakarta.servlet.http.Part;
 import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,6 +46,7 @@ import java.net.UnknownHostException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.innocito.axcl.util.ApplicationConstants.MDC_KEY;
 import static com.innocito.axcl.util.MessageConstants.*;
 import static com.innocito.axcl.util.PropertyNameConstants.SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE;
 
@@ -180,6 +182,7 @@ public class ExceptionHandlerControllerAdvice {
                 "Request Body :  " + requestBody + "\n" +
                 "Headers :  " + requestHeaders + "\n" +
                 "Error Message :  " + errorMessage + "\n" +
+                "CorrelationId : " + MDC.get(MDC_KEY) + "\n" +
                 "Stack Trace :   " + stackTrace;
     }
 
