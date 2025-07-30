@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class SentryService {
-    private AWSSQSConfigProperties awssqsConfigProperties;
-    private SqsSender sqsSender;
+    private final AWSSQSConfigProperties awssqsConfigProperties;
+    private final SqsSender sqsSender;
 
     public void tripWebhook(String webhookRequest) {
         if (StringUtils.isBlank(webhookRequest)) {

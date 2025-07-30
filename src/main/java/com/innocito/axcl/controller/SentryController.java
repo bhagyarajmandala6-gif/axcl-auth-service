@@ -1,6 +1,7 @@
 package com.innocito.axcl.controller;
 
 import com.innocito.axcl.service.SentryService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import static com.innocito.axcl.util.PropertyNameConstants.SENTRY_WEBHOOK_CLIENT
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/sentry")
 public class SentryController {
 
@@ -19,7 +21,7 @@ public class SentryController {
     private String sentryWebhookClientId;
     @Value(SENTRY_WEBHOOK_CLIENT_SECRET)
     private String sentryWebhookClientSecret;
-    private SentryService sentryService;
+    private final SentryService sentryService;
 
     @PostMapping("trips/webhook")
     public ResponseEntity<String> receiveWebhook(

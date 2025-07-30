@@ -382,7 +382,7 @@ public class ExceptionHandlerControllerAdvice {
                         .collect(Collectors.joining(System.lineSeparator()));
                 log.error(REQUEST_BODY + requestBody);
                 return requestBody;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
