@@ -13,12 +13,16 @@ public class ExtraCommercialLicense extends BaseData {
     @Id
     private UUID id;
     @ManyToOne
-    @JoinColumn(name = "driverId")
+    @JoinColumn(name = "driver_id")
     private DriverProfile driver;
-    @Column
+    @Column(name = "license_number")
     private String licenseNumber;
+    @Column(name = "type_id")
     private Integer typeId;
+    @Column(name = "document_url")
     private String documentUrl;
+    @Column(name = "effective_date")
     private LocalDate effectiveDate;
+    @Column(name = "expiration_date")
     private LocalDate expirationDate;
 }

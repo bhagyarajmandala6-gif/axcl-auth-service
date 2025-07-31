@@ -17,13 +17,16 @@ public class TransportationProviderProfile extends BaseData {
     @Id
     private UUID id;
     @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+    @Column(name = "company_name")
     private String companyName;
+    @Column(name = "lic_number")
     private String licNumber;
     private String address;
     private String city;
     private String state;
+    @Column(name = "zip_code")
     private String zipCode;
     private List<String> documents;
 }

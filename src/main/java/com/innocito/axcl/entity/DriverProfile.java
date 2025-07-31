@@ -18,19 +18,24 @@ public class DriverProfile extends BaseData {
     @Id
     private UUID id;
     @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     @ManyToOne
-    @JoinColumn(name = "transportProviderId", referencedColumnName = "id")
+    @JoinColumn(name = "transport_provider_id", referencedColumnName = "id")
     private TransportationProviderProfile transportProvider;
-
+    @Column(name = "first_name")
     private String firstName;//mandatory
+    @Column(name = "middle_name")
     private String middleName;
+    @Column(name = "last_name")
     private String lastName;//mandatory
+    @Column(name = "social_security_number")
     private String socialSecurityNumber;//mandatory
     private Integer gender;//mandatory
     private LocalDate dob;//mandatory
+    @Column(name = "user_status")
     private Integer userStatus;//mandatory
+    @Column(name = "phone_number")
     private String phoneNumber;//mandatory
 
     @OneToOne(mappedBy = "driver", cascade = CascadeType.ALL)
@@ -46,5 +51,6 @@ public class DriverProfile extends BaseData {
     private String address;
     private String city;
     private String state;
+    @Column(name = "zip_code")
     private String zipCode;
 }

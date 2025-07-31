@@ -1,3 +1,4 @@
+/*
 package com.innocito.axcl.entity;
 
 import jakarta.persistence.Entity;
@@ -56,3 +57,4 @@ public class RiderProfile {
     private String deletedBy;
 
 }
+*/
