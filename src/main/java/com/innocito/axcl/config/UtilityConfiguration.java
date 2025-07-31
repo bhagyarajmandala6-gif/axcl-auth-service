@@ -6,8 +6,6 @@ import org.slf4j.MDC;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDatabaseFactory;
-import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestTemplate;
 
@@ -44,11 +42,6 @@ public class UtilityConfiguration {
                 .readTimeout(Duration.ofMillis(5000))
                 .additionalInterceptors(Collections.singletonList(correlationIdInterceptor))
                 .build();
-    }
-
-    @Bean
-    MongoTransactionManager transactionManager(MongoDatabaseFactory dbFactory) {
-        return new MongoTransactionManager(dbFactory);
     }
 
     /*@Bean

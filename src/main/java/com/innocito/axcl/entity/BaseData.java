@@ -1,5 +1,7 @@
 package com.innocito.axcl.entity;
 
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.experimental.FieldNameConstants;
 import org.springframework.data.annotation.CreatedBy;
@@ -13,9 +15,12 @@ import java.util.Date;
 @Data
 public class BaseData {
     @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
     @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedOn;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date deletedOn;
     @CreatedBy
     private String createdBy;

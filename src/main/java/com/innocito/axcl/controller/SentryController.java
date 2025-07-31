@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.innocito.axcl.util.PropertyNameConstants.SENTRY_WEBHOOK_CLIENT_ID;
 import static com.innocito.axcl.util.PropertyNameConstants.SENTRY_WEBHOOK_CLIENT_SECRET;
 
 @Slf4j
@@ -17,20 +16,17 @@ import static com.innocito.axcl.util.PropertyNameConstants.SENTRY_WEBHOOK_CLIENT
 @RequestMapping("/api/sentry")
 public class SentryController {
 
-    @Value(SENTRY_WEBHOOK_CLIENT_ID)
-    private String sentryWebhookClientId;
     @Value(SENTRY_WEBHOOK_CLIENT_SECRET)
     private String sentryWebhookClientSecret;
     private final SentryService sentryService;
 
-    @PostMapping("trips/webhook")
+    @PostMapping("webhook/tripreceiver")
     public ResponseEntity<String> receiveWebhook(
-            @RequestHeader("client-id") String clientId,
-            @RequestHeader("client-secret") String clientSecret,
+            @RequestParam("client-secret") String clientSecret,
             @RequestBody String requestBody) {
-        if (!sentryWebhookClientId.equals(clientId) || !sentryWebhookClientSecret.equals(clientSecret)) {
-            log.error("Invalid credentials for Sentry webhook - clientId: {}, clientSecret: {}",
-                    clientId, clientSecret);
+        if (!sentryWebhookClientSecret.equals(clientSecret)) {
+            log.error("Invalid client secret for Sentry webhook - expected: {}, received: {}",
+                    sentryWebhookClientSecret, clientSecret);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
         sentryService.tripWebhook(requestBody);
