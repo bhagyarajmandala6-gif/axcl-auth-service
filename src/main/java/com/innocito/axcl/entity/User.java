@@ -6,10 +6,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldNameConstants;
-import org.springframework.stereotype.Indexed;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
@@ -17,7 +14,7 @@ import java.util.UUID;
 @FieldNameConstants
 @Entity
 @Table(name = "o_users")
-public class User extends BaseData{
+public class User extends BaseData {
     @Id
     private UUID id;
     private String name;

@@ -1,12 +1,11 @@
 package com.innocito.axcl.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldNameConstants;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +16,7 @@ import java.util.UUID;
 @Entity
 public class DriverProfile extends BaseData {
     @Id
-    private UUID  id;
+    private UUID id;
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;

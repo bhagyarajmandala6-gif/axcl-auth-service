@@ -4,13 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
 @Table(name = "o_extra_commercial_license")
-public class ExtraCommercialLicense extends BaseData{
+public class ExtraCommercialLicense extends BaseData {
     @Id
     private UUID id;
     @ManyToOne

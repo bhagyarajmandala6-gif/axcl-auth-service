@@ -140,4 +140,86 @@ CREATE TABLE axcl.o_background_check (
     FOREIGN KEY (driverId) REFERENCES axcl.o_driver_profile(id)
 );
 
+CREATE TABLE axcl.o_vehicle (
+    id UUID default  gen_random_uuid(),
+    transportProviderId UUID NOT NULL,
+    vin VARCHAR(50) NOT NULL UNIQUE,
+        -- Must be unique for vehicles with status_id = 1
+        -- Cannot contain I, i, O, o, Q, q (enforced via application/later rule)
+        -- Cannot be updated
 
+    fleetNumber VARCHAR(50) NOT NULL,
+    productionYear INTEGER NOT NULL,
+    typeId INTEGER NOT NULL,
+        -- 1 - Livery, 3 - Ambulette, 6 - Ambulance
+
+    make VARCHAR(50) NOT NULL,
+    model VARCHAR(50) NOT NULL,
+    color VARCHAR(50) NOT NULL,
+    seatNumber INTEGER NOT NULL,
+    statusId INTEGER NOT NULL,
+
+    -- DMV Registration
+    dmvLicensePlateNumber VARCHAR(256),
+        -- Cannot be updated
+        -- Allows letters, digits, spaces
+
+    dmvLicensePlateCategoryId INTEGER NOT NULL,
+        -- 1 - Non-Commercial
+        -- 2 - Commercial - Livery (DOT)
+        -- 3 - Commercial - TLC
+        -- 4 - Commercial - BUS (DOT)
+        -- 5 - Commercial - Ambulance
+
+    dmvStateCode CHAR(20) NOT NULL,
+        -- US state abbreviation (e.g., NY)
+
+    dmvEffectiveDate DATE NOT NULL,
+    dmvExpirationDate DATE NOT NULL,
+        -- effective_date < expiration_date should be enforced via trigger or application logic
+
+    dmvDocumentUrl TEXT,
+
+    -- Extra Commercial License (optional)
+    extraLicenseNumber VARCHAR(100),
+    extraTypeId INTEGER CHECK (extraTypeId IN (1, 2, 3)),
+        -- 1 - For-Hire Vehicle (FHV)
+        -- 2 - Paratransit (PR)
+        -- 3 - EMT
+
+    extraEffectiveDate DATE,
+    extraExpirationDate DATE,
+        -- effective_date < expiration_date
+
+    extraDocumentUrl TEXT,
+
+    -- Insurance
+    insurancePolicyNumber VARCHAR(250) NOT NULL,
+        -- Allows letters and digits
+
+    insuranceInsurerName VARCHAR(255) NOT NULL,
+
+    insuranceEffectiveDate DATE NOT NULL,
+    insuranceExpirationDate DATE NOT NULL,
+        -- effective_date < expiration_date
+
+    insuranceDocumentUrl TEXT NOT NULL,
+
+    -- Inspection
+    inspectionEffectiveDate DATE NOT NULL,
+    inspectionExpirationDate DATE NOT NULL,
+        -- effective_date < expiration_date
+
+    inspectionDocumentUrl TEXT NOT NULL,
+
+    createdOn TIMESTAMP DEFAULT NULL,
+    updatedOn TIMESTAMP DEFAULT NULL,
+    deletedOn TIMESTAMP DEFAULT NULL,
+
+    createdBy VARCHAR(255) DEFAULT NULL,
+    updatedBy VARCHAR(255) DEFAULT NULL,
+    deletedBy VARCHAR(255) DEFAULT NULL,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (transportProviderId) REFERENCES axcl.o_transportation_provider_profile(id)
+);

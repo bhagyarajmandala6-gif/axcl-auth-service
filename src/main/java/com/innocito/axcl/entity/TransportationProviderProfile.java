@@ -1,10 +1,10 @@
 package com.innocito.axcl.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldNameConstants;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 

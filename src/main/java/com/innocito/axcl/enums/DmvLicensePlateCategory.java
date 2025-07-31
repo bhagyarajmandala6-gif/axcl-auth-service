@@ -7,7 +7,7 @@ import java.util.List;
 
 public enum DmvLicensePlateCategory {
     NON_COMMERCIAL("Non-Commercial", 1), COMMERCIAL_LIVERY_DOT("Commercial - Livery (DOT)", 2),
-    COMMERCIAL_TLC("Commercial - TLC", 3),COMMERCIAL_BUS_DOT("Commercial - BUS (DOT)", 4),
+    COMMERCIAL_TLC("Commercial - TLC", 3), COMMERCIAL_BUS_DOT("Commercial - BUS (DOT)", 4),
     COMMERCIAL_AMBULANCE("Commercial - Ambulance", 5);
     private final String key;
     private final int value;

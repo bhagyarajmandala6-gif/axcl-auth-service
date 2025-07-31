@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "o_dmv_license")
-public class DmvLicense extends BaseData{
+public class DmvLicense extends BaseData {
     @Id
     private UUID id;
     @OneToOne
