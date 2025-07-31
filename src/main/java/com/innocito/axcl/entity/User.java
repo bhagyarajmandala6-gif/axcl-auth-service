@@ -17,20 +17,16 @@ import java.util.UUID;
 @FieldNameConstants
 @Entity
 @Table(name = "o_users")
-public class User extends BaseData implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class User extends BaseData{
     @Id
     private UUID id;
-    private String firstName;
-    private String lastName;
     private String name;
     private String email;
     private String mobileNumber;
     private String iso2CountryCode;
-    private String password;
+    private String passwordHash;
     private Integer gender;
     private String profileImg;
-    private Integer userType;
+    private Integer userRole;
     private Integer userStatus;
 }

@@ -1,5 +1,6 @@
 package com.innocito.axcl.entity;
 
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.util.Date;
 
 @FieldNameConstants
 @Data
+@MappedSuperclass
 public class BaseData {
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)

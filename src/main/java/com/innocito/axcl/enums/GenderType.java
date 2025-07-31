@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum GenderType {
-    MALE("Male", 1), FEMALE("Female", 2), Others("Others", 3);
+    M("Male", 1), F("Female", 2),
+    O("Others", 3), U("Prefer not to say", 4);
     private final String key;
     private final int value;
 

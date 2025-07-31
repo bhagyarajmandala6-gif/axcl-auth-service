@@ -5,13 +5,13 @@ import com.innocito.axcl.exception.EnumNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 
-public enum UserType {
-    USER("User", 1), TP_ADMIN("TPAdmin", 2),
-    DRIVER("Driver", 3), SUPER_ADMIN("SuperAdmin", 4);
+public enum UserStatus {
+    ACTIVE("ACTIVE", 1), SUSPENDED("SUSPENDED", 2),
+    INACTIVE("INACTIVE", 3);
     private final String key;
     private final int value;
 
-    UserType(String key, int value) {
+    UserStatus(String key, int value) {
         this.key = key;
         this.value = value;
     }
@@ -25,28 +25,28 @@ public enum UserType {
     }
 
     public static List<String> getKeys() {
-        return Arrays.stream(values()).map(UserType::getKey).toList();
+        return Arrays.stream(values()).map(UserStatus::getKey).toList();
     }
 
     public static List<Integer> getValues() {
-        return Arrays.stream(values()).map(UserType::getValue).toList();
+        return Arrays.stream(values()).map(UserStatus::getValue).toList();
     }
 
-    public static UserType getByKey(String key) {
-        for (UserType type : values()) {
+    public static UserStatus getByKey(String key) {
+        for (UserStatus type : values()) {
             if (type.getKey().equalsIgnoreCase(key)) {
                 return type;
             }
         }
-        throw new EnumNotFoundException("user type", "user type" + "not found with " + key);
+        throw new EnumNotFoundException("user status", "user status" + "not found with " + key);
     }
 
-    public static UserType getByValue(int value) {
-        for (UserType type : values()) {
+    public static UserStatus getByValue(int value) {
+        for (UserStatus type : values()) {
             if (type.getValue() == value) {
                 return type;
             }
         }
-        throw new EnumNotFoundException("user type", "user type" + "not found with " + value);
+        throw new EnumNotFoundException("user status", "user status" + "not found with " + value);
     }
 }
