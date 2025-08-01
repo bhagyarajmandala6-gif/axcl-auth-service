@@ -2,13 +2,13 @@
 --changeset axcl:create-tables
 CREATE TABLE axcl.o_users (
     id UUID default gen_random_uuid(),
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    mobile_number VARCHAR(50) NOT NULL UNIQUE,
-    iso2_country_code VARCHAR(10) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    mobile_number VARCHAR(20) NOT NULL UNIQUE,
+    iso2_country_code VARCHAR(2) NOT NULL,
     password_hash VARCHAR(120) NOT NULL,
     gender INTEGER NOT NULL,
-    profile_img VARCHAR(500),
+    profile_img VARCHAR(100),
     user_role INTEGER NOT NULL,
     user_status INTEGER NOT NULL,
 
@@ -17,20 +17,20 @@ CREATE TABLE axcl.o_users (
     updated_on TIMESTAMP DEFAULT NULL,
     deleted_on TIMESTAMP DEFAULT NULL,
 
-    created_by VARCHAR(255) DEFAULT NULL,
-    updated_by VARCHAR(255) DEFAULT NULL,
-    deleted_by VARCHAR(255) DEFAULT NULL,
+    created_by UUID DEFAULT NULL,
+    updated_by UUID DEFAULT NULL,
+    deleted_by UUID DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE axcl.o_transportation_provider_profile (
     id UUID default  gen_random_uuid(),
     user_id UUID NOT NULL,
-    company_name VARCHAR(255),
-    lic_number VARCHAR(30),
+    company_name VARCHAR(100),
+    lic_number VARCHAR(100),
     address VARCHAR(100),
     city VARCHAR(100),
-    state CHAR(2),
+    state CHAR(10),
     zip_code VARCHAR(10),
 
     documents TEXT[],  -- array of document URLs or paths
@@ -39,9 +39,9 @@ CREATE TABLE axcl.o_transportation_provider_profile (
     updated_on TIMESTAMP DEFAULT NULL,
     deleted_on TIMESTAMP DEFAULT NULL,
 
-    created_by VARCHAR(255) DEFAULT NULL,
-    updated_by VARCHAR(255) DEFAULT NULL,
-    deleted_by VARCHAR(255) DEFAULT NULL,
+    created_by UUID DEFAULT NULL,
+    updated_by UUID DEFAULT NULL,
+    deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES axcl.o_users(id)
@@ -51,9 +51,9 @@ CREATE TABLE axcl.o_driver_profile (
     id UUID default  gen_random_uuid(),
     user_id UUID NOT NULL,
     transport_provider_id UUID NOT NULL,
-    first_name VARCHAR(50) NOT NULL,
-    middle_name VARCHAR(50),
-    last_name VARCHAR(50) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    middle_name VARCHAR(100),
+    last_name VARCHAR(100) NOT NULL,
     social_security_number CHAR(4) NOT NULL,
     gender INTEGER NOT NULL,
     dob DATE NOT NULL,
@@ -69,9 +69,9 @@ CREATE TABLE axcl.o_driver_profile (
     updated_on TIMESTAMP DEFAULT NULL,
     deleted_on TIMESTAMP DEFAULT NULL,
 
-    created_by VARCHAR(255) DEFAULT NULL,
-    updated_by VARCHAR(255) DEFAULT NULL,
-    deleted_by VARCHAR(255) DEFAULT NULL,
+    created_by UUID DEFAULT NULL,
+    updated_by UUID DEFAULT NULL,
+    deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES axcl.o_users(id),
@@ -87,14 +87,16 @@ CREATE TABLE axcl.o_dmv_license (
     document_url TEXT,
     effective_date DATE NOT NULL,
     expiration_date DATE NOT NULL,
+    endorsements TEXT[],  -- array of endorsements URLs or paths
+    restrictions TEXT[],  -- array of restrictions URLs or paths
 
     created_on TIMESTAMP DEFAULT NULL,
     updated_on TIMESTAMP DEFAULT NULL,
     deleted_on TIMESTAMP DEFAULT NULL,
 
-    created_by VARCHAR(255) DEFAULT NULL,
-    updated_by VARCHAR(255) DEFAULT NULL,
-    deleted_by VARCHAR(255) DEFAULT NULL,
+    created_by UUID DEFAULT NULL,
+    updated_by UUID DEFAULT NULL,
+    deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (driver_id) REFERENCES axcl.o_driver_profile(id)
@@ -113,9 +115,9 @@ CREATE TABLE axcl.o_extra_commercial_license (
     updated_on TIMESTAMP DEFAULT NULL,
     deleted_on TIMESTAMP DEFAULT NULL,
 
-    created_by VARCHAR(255) DEFAULT NULL,
-    updated_by VARCHAR(255) DEFAULT NULL,
-    deleted_by VARCHAR(255) DEFAULT NULL,
+    created_by UUID DEFAULT NULL,
+    updated_by UUID DEFAULT NULL,
+    deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (driver_id) REFERENCES axcl.o_driver_profile(id)
@@ -132,9 +134,9 @@ CREATE TABLE axcl.o_background_check (
     updated_on TIMESTAMP DEFAULT NULL,
     deleted_on TIMESTAMP DEFAULT NULL,
 
-    created_by VARCHAR(255) DEFAULT NULL,
-    updated_by VARCHAR(255) DEFAULT NULL,
-    deleted_by VARCHAR(255) DEFAULT NULL,
+    created_by UUID DEFAULT NULL,
+    updated_by UUID DEFAULT NULL,
+    deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (driver_id) REFERENCES axcl.o_driver_profile(id)
@@ -216,9 +218,9 @@ CREATE TABLE axcl.o_vehicle (
     updated_on TIMESTAMP DEFAULT NULL,
     deleted_on TIMESTAMP DEFAULT NULL,
 
-    created_by VARCHAR(255) DEFAULT NULL,
-    updated_by VARCHAR(255) DEFAULT NULL,
-    deleted_by VARCHAR(255) DEFAULT NULL,
+    created_by UUID DEFAULT NULL,
+    updated_by UUID DEFAULT NULL,
+    deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (transport_provider_id) REFERENCES axcl.o_transportation_provider_profile(id)

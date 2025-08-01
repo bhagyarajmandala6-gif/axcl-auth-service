@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldNameConstants;
 
+import java.util.Date;
 import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
@@ -33,4 +34,6 @@ public class User extends BaseData {
     private Integer userRole;
     @Column(name = "user_status")
     private Integer userStatus;
+    @Column(name = "last_logout_at")
+    private Date lastLogoutAt;
 }

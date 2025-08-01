@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
+import java.util.UUID;
 
 @FieldNameConstants
 @Data
@@ -30,10 +31,10 @@ public class BaseData {
     private Date deletedOn;
     @CreatedBy
     @Column(name = "created_by")
-    private String createdBy;
+    private UUID createdBy;
     @LastModifiedBy
     @Column(name = "updated_by")
-    private String updatedBy;
+    private UUID updatedBy;
     @Column(name = "deleted_by")
-    private String deletedBy;
+    private UUID deletedBy;
 }

@@ -1,14 +1,21 @@
 package com.innocito.axcl.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.MDC;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.client.RestTemplate;
 
+import javax.sql.DataSource;
 import java.time.Duration;
 import java.util.Collections;
 
@@ -42,6 +49,22 @@ public class UtilityConfiguration {
                 .readTimeout(Duration.ofMillis(5000))
                 .additionalInterceptors(Collections.singletonList(correlationIdInterceptor))
                 .build();
+    }
+
+    @Primary
+    @Bean(name = "entityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
+                                                                       DataSource dataSource) {
+        return builder
+                .dataSource(dataSource)
+                .packages("com.innocito.testpilot") // Adjust package name
+                .persistenceUnit("default")
+                .build();
+    }
+
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
 
     /*@Bean
