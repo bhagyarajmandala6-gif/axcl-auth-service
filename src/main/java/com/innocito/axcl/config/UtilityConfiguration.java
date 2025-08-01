@@ -57,7 +57,7 @@ public class UtilityConfiguration {
                                                                        DataSource dataSource) {
         return builder
                 .dataSource(dataSource)
-                .packages("com.innocito.testpilot") // Adjust package name
+                .packages("com.innocito.axcl") // Adjust package name
                 .persistenceUnit("default")
                 .build();
     }

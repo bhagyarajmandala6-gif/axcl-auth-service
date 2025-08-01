@@ -3,7 +3,9 @@ package com.innocito.axcl.entity;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -31,9 +33,11 @@ public class DmvLicense extends BaseData {
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
     @Type(StringArrayType.class)
+    @JdbcTypeCode(SqlTypes.ARRAY)
     @Column(name = "endorsements", columnDefinition = "text[]")
     private List<String> endorsements;
     @Type(StringArrayType.class)
+    @JdbcTypeCode(SqlTypes.ARRAY)
     @Column(name = "restrictions", columnDefinition = "text[]")
     private List<String> restrictions;
 }
