@@ -1,13 +1,9 @@
 package com.innocito.axcl.entity;
 
-import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldNameConstants;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,8 +28,7 @@ public class TransportationProviderProfile extends BaseData {
     private String state;
     @Column(name = "zip_code")
     private String zipCode;
-    @Type(StringArrayType.class)
-    @JdbcTypeCode(SqlTypes.ARRAY)
+    /*@Type(ListArrayType.class)*/
     @Column(name = "documents", columnDefinition = "text[]")
     private List<String> documents;
 }
