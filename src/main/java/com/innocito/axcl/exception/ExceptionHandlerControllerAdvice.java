@@ -1,7 +1,7 @@
 package com.innocito.axcl.exception;
 
 import com.innocito.axcl.annotations.Priority;
-import com.innocito.axcl.enums.UserType;
+import com.innocito.axcl.enums.UserRole;
 import com.innocito.axcl.model.ApiResponse;
 import com.innocito.axcl.model.ErrorDetails;
 import com.innocito.axcl.model.TenantContext;
@@ -177,7 +177,7 @@ public class ExceptionHandlerControllerAdvice {
                 "Request URI :  " + request.getRequestURI() + "\n" +
                 "Request Method :  " + request.getMethod() + "\n" +
                 "User ID :  " + tenantData.getLoggedInUserId() + "\n" +
-                "User Type :  " + UserType.getByValue(tenantData.getLoggedInUserType()).getKey() + "\n" +
+                "User Type :  " + UserRole.getByValue(tenantData.getLoggedInUserType()).getKey() + "\n" +
                 "Request Params :  " + requestParams + "\n" +
                 "Request Body :  " + requestBody + "\n" +
                 "Headers :  " + requestHeaders + "\n" +
