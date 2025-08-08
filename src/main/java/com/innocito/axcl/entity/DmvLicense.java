@@ -12,6 +12,8 @@ import java.util.UUID;
 @Table(name = "o_dmv_license")
 public class DmvLicense extends BaseData {
     @Id
+    @GeneratedValue
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     @OneToOne
     @JoinColumn(name = "driver_id")
@@ -28,12 +30,8 @@ public class DmvLicense extends BaseData {
     private LocalDate effectiveDate;
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
-    /*@Type(StringArrayType.class)
-    @JdbcTypeCode(SqlTypes.ARRAY)*/
     @Column(name = "endorsements", columnDefinition = "text[]")
     private List<String> endorsements;
-    /*@Type(StringArrayType.class)
-    @JdbcTypeCode(SqlTypes.ARRAY)*/
     @Column(name = "restrictions", columnDefinition = "text[]")
     private List<String> restrictions;
 }

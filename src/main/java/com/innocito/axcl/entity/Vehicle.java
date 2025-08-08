@@ -13,6 +13,8 @@ import java.util.UUID;
 @Data
 public class Vehicle extends BaseData {
     @Id
+    @GeneratedValue
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     @ManyToOne
     @JoinColumn(name = "transport_provider_id", referencedColumnName = "id")

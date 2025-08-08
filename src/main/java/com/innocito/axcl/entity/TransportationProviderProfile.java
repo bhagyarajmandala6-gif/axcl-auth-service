@@ -15,6 +15,8 @@ import java.util.UUID;
 @Entity
 public class TransportationProviderProfile extends BaseData {
     @Id
+    @GeneratedValue
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -28,7 +30,6 @@ public class TransportationProviderProfile extends BaseData {
     private String state;
     @Column(name = "zip_code")
     private String zipCode;
-    /*@Type(ListArrayType.class)*/
     @Column(name = "documents", columnDefinition = "text[]")
     private List<String> documents;
 }

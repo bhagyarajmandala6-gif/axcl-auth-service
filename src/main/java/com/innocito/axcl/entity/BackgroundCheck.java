@@ -11,6 +11,8 @@ import java.util.UUID;
 @Table(name = "o_background_check")
 public class BackgroundCheck extends BaseData {
     @Id
+    @GeneratedValue
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     @OneToOne
     @JoinColumn(name = "driver_id")

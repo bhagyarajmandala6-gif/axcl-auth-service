@@ -1,7 +1,7 @@
 --liquibase formatted sql
 --changeset axcl:create-tables
-CREATE TABLE axcl.o_users (
-    id UUID default gen_random_uuid(),
+CREATE TABLE public.o_users (
+    id UUID,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     mobile_number VARCHAR(20) NOT NULL UNIQUE,
@@ -23,8 +23,8 @@ CREATE TABLE axcl.o_users (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE axcl.o_transportation_provider_profile (
-    id UUID default  gen_random_uuid(),
+CREATE TABLE public.o_transportation_provider_profile (
+    id UUID,
     user_id UUID NOT NULL,
     company_name VARCHAR(100),
     lic_number VARCHAR(100),
@@ -44,11 +44,11 @@ CREATE TABLE axcl.o_transportation_provider_profile (
     deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES axcl.o_users(id)
+    FOREIGN KEY (user_id) REFERENCES public.o_users(id)
 );
 
-CREATE TABLE axcl.o_driver_profile (
-    id UUID default  gen_random_uuid(),
+CREATE TABLE public.o_driver_profile (
+    id UUID,
     user_id UUID NOT NULL,
     transport_provider_id UUID NOT NULL,
     first_name VARCHAR(100) NOT NULL,
@@ -74,12 +74,12 @@ CREATE TABLE axcl.o_driver_profile (
     deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES axcl.o_users(id),
-    FOREIGN KEY (transport_provider_id) REFERENCES axcl.o_transportation_provider_profile(id)
+    FOREIGN KEY (user_id) REFERENCES public.o_users(id),
+    FOREIGN KEY (transport_provider_id) REFERENCES public.o_transportation_provider_profile(id)
 );
 
-CREATE TABLE axcl.o_dmv_license (
-    id UUID DEFAULT gen_random_uuid(),
+CREATE TABLE public.o_dmv_license (
+    id UUID,
     driver_id UUID NOT NULL UNIQUE,
     license_number VARCHAR(256) NOT NULL UNIQUE,
     state_code CHAR(10) NOT NULL,
@@ -99,11 +99,11 @@ CREATE TABLE axcl.o_dmv_license (
     deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (driver_id) REFERENCES axcl.o_driver_profile(id)
+    FOREIGN KEY (driver_id) REFERENCES public.o_driver_profile(id)
 );
 
-CREATE TABLE axcl.o_extra_commercial_license (
-    id UUID DEFAULT gen_random_uuid(),
+CREATE TABLE public.o_extra_commercial_license (
+    id UUID,
     driver_id UUID NOT NULL,
     license_number VARCHAR(256) NOT NULL,
     type_id INTEGER NOT NULL,
@@ -120,11 +120,11 @@ CREATE TABLE axcl.o_extra_commercial_license (
     deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (driver_id) REFERENCES axcl.o_driver_profile(id)
+    FOREIGN KEY (driver_id) REFERENCES public.o_driver_profile(id)
 );
 
-CREATE TABLE axcl.o_background_check (
-    id UUID DEFAULT gen_random_uuid(),
+CREATE TABLE public.o_background_check (
+    id UUID,
     driver_id UUID NOT NULL UNIQUE,
     document_url TEXT,
     effective_date DATE NOT NULL,
@@ -139,11 +139,11 @@ CREATE TABLE axcl.o_background_check (
     deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (driver_id) REFERENCES axcl.o_driver_profile(id)
+    FOREIGN KEY (driver_id) REFERENCES public.o_driver_profile(id)
 );
 
-CREATE TABLE axcl.o_vehicle (
-    id UUID default  gen_random_uuid(),
+CREATE TABLE public.o_vehicle (
+    id UUID,
     transport_provider_id UUID NOT NULL,
     vin VARCHAR(50) NOT NULL UNIQUE,
         -- Must be unique for vehicles with status_id = 1
@@ -223,5 +223,5 @@ CREATE TABLE axcl.o_vehicle (
     deleted_by UUID DEFAULT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (transport_provider_id) REFERENCES axcl.o_transportation_provider_profile(id)
+    FOREIGN KEY (transport_provider_id) REFERENCES public.o_transportation_provider_profile(id)
 );

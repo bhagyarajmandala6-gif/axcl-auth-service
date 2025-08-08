@@ -11,6 +11,8 @@ import java.util.UUID;
 @Table(name = "o_extra_commercial_license")
 public class ExtraCommercialLicense extends BaseData {
     @Id
+    @GeneratedValue
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     @ManyToOne
     @JoinColumn(name = "driver_id")
