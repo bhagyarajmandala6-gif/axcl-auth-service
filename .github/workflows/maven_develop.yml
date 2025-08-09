@@ -32,7 +32,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml -DskipTests
+      run: |
+       mvn -B package --file pom.xml -DskipTests
+       ls target/
     - name: Uplaod to ec2
       if: success()
       run: |
