@@ -38,7 +38,11 @@ jobs:
     - name: Build with Maven
       run: |
        mvn -B package --file pom.xml -DskipTests
-       ls target/
+    - name: Show working directory
+      run: |
+        echo "Current path is: $PWD"
+        pwd
+        ls -la
     - name: Uplaod to ec2
       if: success()
       run: |
