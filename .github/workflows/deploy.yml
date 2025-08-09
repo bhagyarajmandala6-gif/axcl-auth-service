@@ -34,4 +34,5 @@ jobs:
           script: |
             pkill -f 'axcl_auth_service.jar' || true
             cd /home/${{ secrets.EC2_USER }}/app/target
-            nohup java -jar axcl_auth_service.jar > app.log 2>&1 &
+            setsid java -jar axcl_auth_service.jar > app.log 2>&1 < /dev/null &
+
