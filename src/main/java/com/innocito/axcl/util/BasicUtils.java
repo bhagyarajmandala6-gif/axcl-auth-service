@@ -18,7 +18,7 @@ public class BasicUtils {
         return messageSource.getMessage(key, objects, LocaleContextHolder.getLocale());
     }
 
-    public String maskMobileNumber(String mobileNumber) {
+    public static String maskMobileNumber(String mobileNumber) {
         if (StringUtils.isBlank(mobileNumber)) {
             return mobileNumber;
         }
@@ -26,8 +26,14 @@ public class BasicUtils {
                 .substring(mobileNumber.indexOf("-") + 1).replaceAll(".(?=.{4})", "*");
         return mobileNumber.substring(0, mobileNumber.indexOf("-") + 1) + maskedNumber;
     }
+    public static String maskSSN(String last4Digits) {
+        if (StringUtils.isBlank(last4Digits) || last4Digits.length() != 4) {
+            return "Invalid SSN";
+        }
+        return "***-**-" + last4Digits;
+    }
 
-    public String maskEmail(String email) {
+    public static String maskEmail(String email) {
         if (Strings.isBlank(email)) {
             return null;
         }

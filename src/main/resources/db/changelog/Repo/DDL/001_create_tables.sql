@@ -225,3 +225,21 @@ CREATE TABLE public.o_vehicle (
     PRIMARY KEY (id),
     FOREIGN KEY (transport_provider_id) REFERENCES public.o_transportation_provider_profile(id)
 );
+
+CREATE TABLE public.o_auth_tokens (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),  -- use gen_random_uuid() from pgcrypto
+
+    refresh_token VARCHAR(1024) NOT NULL UNIQUE,
+    user_id VARCHAR(256) NOT NULL,
+
+    expires_at TIMESTAMP,
+
+    created_on TIMESTAMP DEFAULT NULL,
+    updated_on TIMESTAMP DEFAULT NULL,
+    deleted_on TIMESTAMP DEFAULT NULL,
+
+    created_by UUID DEFAULT NULL,
+    updated_by UUID DEFAULT NULL,
+    deleted_by UUID DEFAULT NULL
+);
+

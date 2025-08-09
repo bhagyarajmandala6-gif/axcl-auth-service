@@ -10,6 +10,8 @@ public class PropertyNameConstants {
     public static final String UNHANDLED_ISSUES_NOTIFICATIONS_EMAIL = "${unhandled.issues.notifications.email}";
     public static final String SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE = "${spring.servlet.multipart.max-file-size}";
     public static final String JWT_SIGNING_KEY = "${jwt.signing.key}";
+    public static final String JWT_TOKEN_VALID_IN_MILLIS = "${jwt.access-token.expiration}";
+    public static final String JWT_RF_TOKEN_VALID_IN_DAYS = "${jwt.refresh-token.expiration}";
     public static final String APP_VERSION = "${app.version}";
     public static final String IMAGE_UPLOAD_ALLOWED_FILE_EXTENSIONS = "${image.upload.allowed.file.extensions}";
     public static final String IMAGE_UPLOAD_ALLOWED_CONTENT_TYPES = "${image.upload.allowed.content.types}";

@@ -1,16 +1,15 @@
-/*
+
 package com.innocito.axcl.config.filters;
 
 import com.innocito.axcl.config.JwtUtil;
 import com.innocito.axcl.entity.User;
-import com.innocito.axcl.enums.UserType;
-import com.innocito.axcl.exception.AuthorizationException;
-import com.innocito.axcl.exception.ValidationException;
-import com.innocito.axcl.model.ErrorDetails;
+import com.innocito.axcl.enums.UserRole;
+import com.innocito.axcl.enums.UserStatus;
 import com.innocito.axcl.model.TenantContext;
 import com.innocito.axcl.model.TenantData;
 import com.innocito.axcl.repository.UserRepository;
 import com.innocito.axcl.util.BasicUtils;
+import com.innocito.axcl.util.MessageConstants;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -59,27 +58,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
-                User user = userRepository.findById(userName).get();
+
+                User user = userRepository.findByEmail(userName);
                 if (UserStatus.ACTIVE.getValue() != user.getUserStatus()) {
-                    log.info(basicUtils.getLocalizedMessage(AUTH_USER_NOT_ACTIVE, null));
-                    throw new JwtException(basicUtils.getLocalizedMessage(USER_INACTIVE, null));
-                }
-                if (user.getUserType() != null && user.getUserType() != UserType.USER.getValue()) {
-                    throw new ValidationException(List.of(new ErrorDetails(UNAUTHORIZED_ACCESS, basicUtils.getLocalizedMessage(UN_AUTHORIZED_TO_ACCESS, null))));
-                }
-                if (!user.isBasicSetupCompleted()
-                        && (!request.getServletPath().contains("/api/verification")
-                        && !request.getServletPath().contains("/api/users/personalInfo")
-                        && !request.getServletPath().contains("/api/users/accessToken"))) {
-                    throw new AuthorizationException(UNAUTHORIZED_ACCESS, basicUtils.getLocalizedMessage(BASIC_SETUP_PENDING, null));
+                    log.info(basicUtils.getLocalizedMessage(MessageConstants.AUTH_USER_NOT_ACTIVE, null));
+                    throw new JwtException(basicUtils.getLocalizedMessage(MessageConstants.USER_INACTIVE, null));
                 }
 
                 if (jwtUtil.validateToken(jwt, userDetails)) {
                     List<SimpleGrantedAuthority> authorities = new ArrayList<>();
                     tenantData.setLoggedInUserId(jwtUtil.extractAllClaims(jwt).get(LOGGED_IN_USER_ID, String.class));
                     tenantData.setLoggedInUserType(jwtUtil.extractAllClaims(jwt).get(LOGGED_IN_USER_TYPE, Integer.class));
-                    tenantData.setGender(jwtUtil.extractAllClaims(jwt).get(GENDER, Integer.class));
-                    tenantData.setPermissions(List.of(UserType.getByValue(user.getUserType()).name()));
+                    tenantData.setPermissions(List.of(UserRole.getByValue(user.getUserRole()).name()));
                     for (String permissionTemp : tenantData.getPermissions()) {
                         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permissionTemp);
                         authorities.add(authority);
@@ -105,4 +95,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             response.getWriter().write("{\"error\": \"Invalid or expired token\"}");
         }
     }
-}*/
+}

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -22,5 +23,6 @@ public class BackgroundCheck extends BaseData {
     @Column(name = "effective_date")
     private LocalDate effectiveDate;
     @Column(name = "expiration_date")
-    private LocalDate expirationDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expirationDate;
 }
