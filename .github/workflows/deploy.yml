@@ -31,8 +31,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "target/*.jar"
           target: "/home/${{ secrets.EC2_USER }}/app/"
-
-
           script: |
-            pkill -f 'java -jar' || true
+            pkill -f 'axcl_auth_service.jar' || true
             nohup java -jar /home/${{ secrets.EC2_USER }}/app/target/axcl_auth_service.jar > app.log 2>&1 &
