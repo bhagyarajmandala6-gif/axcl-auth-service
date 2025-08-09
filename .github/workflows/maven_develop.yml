@@ -37,7 +37,7 @@ jobs:
 
     - name: Build with Maven
       run: |
-       mvn -B package --file pom.xml -DskipTests
+       mvn -B package --file axcl-auth-service/pom.xml -DskipTests
     - name: List target directory
       run: ls -l target
 
