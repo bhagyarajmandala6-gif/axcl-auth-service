@@ -15,7 +15,7 @@
 	<version>1.0.0</version>
 	<name>axcl_external_integration_java</name>
 	<description>axcl_external_integration_java</description>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
