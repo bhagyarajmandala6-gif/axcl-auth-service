@@ -11,10 +11,10 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.innocito.axcl</groupId>
-	<artifactId>axcl_external_integration_java</artifactId>
+	<artifactId>axcl_auth_service</artifactId>
 	<version>1.0.0</version>
-	<name>axcl_external_integration_java</name>
-	<description>axcl_external_integration_java</description>
+	<name>axcl_auth_service</name>
+	<description>axcl_auth_service</description>
 	<packaging>jar</packaging>
 	<properties>
 		<java.version>21</java.version>
